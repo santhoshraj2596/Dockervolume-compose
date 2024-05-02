@@ -1,0 +1,33 @@
+version: "3"
+services:
+  nginx1:
+    image: compose:latest
+    container_name: test
+    ports:
+      - '3001:80'
+    volumes:
+      - task1:/var/opt/nginx
+
+
+  nginx2:
+    image: nginx:latest
+    container_name: test2
+    ports:
+      - '3002:80'
+    volumes:
+      - task2:/usr/share/nginx
+
+volumes:
+  task1:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ubuntu/task1
+      o: bind
+
+  task2:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ubuntu/task2
+      o: bind    
